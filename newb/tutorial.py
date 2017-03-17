@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from base import *
 from ball import Ball
+from bat import Bat
 
 def main():
     # Initialise screen
@@ -15,12 +16,12 @@ def main():
 
     # Display some text
     font = pygame.font.Font(None, 44)
-    text = font.render("Hello World", 1, (10, 10, 10))
+    # text = font.render("Hello World", 1, (10, 10, 10))
     # need to make a rect to contain text, move rect to move text
-    textpos = text.get_rect()
-    textpos.centerx = background.get_rect().centerx
-    textpos.centery = background.get_rect().centery
-    background.blit(text, textpos)
+    # textpos = text.get_rect()
+    # textpos.centerx = background.get_rect().centerx
+    # textpos.centery = background.get_rect().centery
+    # background.blit(text, textpos)
 
     # Blit everything to the screen, 
     # copy the pixels belonging to said object onto the destination object.
@@ -28,24 +29,52 @@ def main():
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
+    # init player
+    global player 
+    player = Bat("right")
+    # init ball
     ball = Ball((20,5))
+
+    # init sprites
+    playersprites = pygame.sprite.RenderPlain((player))
     ballsprite = pygame.sprite.RenderPlain(ball)
 
+    # Initialise clock
+    # whyyyyyyy
+    clock = pygame.time.Clock()
+
     # Event loop
-    while True:
+    running = True
+    while running:
+        clock.tick(60)
+
         pressed = pygame.key.get_pressed() 
         get_event = pygame.event.get()
 
         ballsprite.update()
+        playersprites.update()
         for event in get_event:
             if event.type == QUIT:
-                return  
+                running = False
             if event.type == pygame.KEYDOWN:
                 if (event.key == pygame.K_SPACE):
-                    return              
+                    running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    print("K_up")
+                    player.moveup()
+                if event.key == pygame.K_DOWN:
+                    print("K_down")
+                    player.movedown()
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    player.movepos = [0,0]
+                    player.state = "still"                                         
 
         screen.blit(background, (0, 0))
+        screen.blit(background, player.rect)
         ballsprite.draw(screen)
+        playersprites.draw(screen)
         pygame.display.flip()
 
 
