@@ -29,14 +29,14 @@ def main():
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
-    # init player
-    global player 
-    player = Bat("right")
+    # init player1
+    global player1 
+    player1 = Bat("right")
     # init ball
     ball = Ball((20,5))
 
     # init sprites
-    playersprites = pygame.sprite.RenderPlain((player))
+    playersprites = pygame.sprite.RenderPlain((player1))
     ballsprite = pygame.sprite.RenderPlain(ball)
 
     # Initialise clock
@@ -51,7 +51,7 @@ def main():
         pressed = pygame.key.get_pressed() 
         get_event = pygame.event.get()
 
-        ballsprite.update()
+        ballsprite.update(player1)
         playersprites.update()
         for event in get_event:
             if event.type == QUIT:
@@ -62,17 +62,17 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     print("K_up")
-                    player.moveup()
+                    player1.moveup()
                 if event.key == pygame.K_DOWN:
                     print("K_down")
-                    player.movedown()
+                    player1.movedown()
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    player.movepos = [0,0]
-                    player.state = "still"                                         
+                    player1.movepos = [0,0]
+                    player1.state = "still"                                         
 
         screen.blit(background, (0, 0))
-        screen.blit(background, player.rect)
+        screen.blit(background, player1.rect)
         ballsprite.draw(screen)
         playersprites.draw(screen)
         pygame.display.flip()
