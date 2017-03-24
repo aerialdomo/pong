@@ -1,5 +1,6 @@
 from base import *
 
+
 class Bat(pygame.sprite.Sprite):
     """Movable tennis 'bat' with which one hits the ball
     Returns: bat object
@@ -26,8 +27,7 @@ class Bat(pygame.sprite.Sprite):
             self.rect.midright = self.area.midright
 
     def update(self):
-        # put in sheet that this differes from doc
-        newpos = self.rect.move(self.movepos[0], self.movepos[1])
+        newpos = self.rect.move(*self.movepos)
         if self.area.contains(newpos):
             self.rect = newpos
         pygame.event.pump()

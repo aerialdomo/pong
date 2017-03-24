@@ -36,6 +36,8 @@ class Ball(pygame.sprite.Sprite):
             if tr and br:
                 angle = math.pi - angle
                 #self.offcourt()
+            if tr and br or (tl and bl):
+                print(111)
         else:
             # Deflate the rectangles so you can't catch a ball behind the bat
             player1.rect.inflate(-3, -3)
