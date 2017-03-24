@@ -62,10 +62,8 @@ def main():
                     running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    print("K_up")
                     player1.moveup()
                 if event.key == pygame.K_DOWN:
-                    print("K_down")
                     player1.movedown()
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP or event.key == pygame.K_DOWN:

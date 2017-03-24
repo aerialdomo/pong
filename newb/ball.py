@@ -63,5 +63,5 @@ class Ball(pygame.sprite.Sprite):
 
     def offcourt(self, player):
         player.score += 1
-        print(player.score)
+
           
