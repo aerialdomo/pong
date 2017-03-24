@@ -3,10 +3,17 @@ from base import *
 from ball import Ball
 from bat import Bat
 
+def score_display(background, screen, font, player1):
+    text = font.render(str(player1.score), 1, (10, 10, 10))
+    textpos = text.get_rect()
+    textpos.centerx = background.get_rect().centerx
+    textpos.centery = background.get_rect().centery
+    screen.blit(text, textpos)
+
 def main():
     # Initialise screen
     pygame.init()
-    screen = pygame.display.set_mode((250, 200))
+    screen = pygame.display.set_mode((350, 200))
     pygame.display.set_caption('I am a cow')
 
     # Fill background
@@ -16,12 +23,6 @@ def main():
 
     # Display some text
     font = pygame.font.Font(None, 44)
-    # text = font.render("Hello World", 1, (10, 10, 10))
-    # need to make a rect to contain text, move rect to move text
-    # textpos = text.get_rect()
-    # textpos.centerx = background.get_rect().centerx
-    # textpos.centery = background.get_rect().centery
-    # background.blit(text, textpos)
 
     # Blit everything to the screen, 
     # copy the pixels belonging to said object onto the destination object.
@@ -75,7 +76,10 @@ def main():
         screen.blit(background, player1.rect)
         ballsprite.draw(screen)
         playersprites.draw(screen)
+        # probs a better place for some of the things in here
+        score_display(background, screen, font, player1)
+
         pygame.display.flip()
 
-
 if __name__ == '__main__': main()
+

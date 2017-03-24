@@ -16,6 +16,7 @@ class Bat(pygame.sprite.Sprite):
         self.side = side
         self.speed = 30
         self.state = "still"
+        self.score = 0
         self.reinit()
 
     def reinit(self):

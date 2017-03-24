@@ -31,18 +31,15 @@ class Ball(pygame.sprite.Sprite):
             if tr and tl or (br and bl):
                 angle = -angle
             if tl and bl:
-                #self.offcourt()
+                self.offcourt(player=player1)
                 angle = math.pi - angle
             if tr and br:
                 angle = math.pi - angle
-                #self.offcourt()
-            if tr and br or (tl and bl):
-                print(111)
+                # self.offcourt()
+            # if tr and br or (tl and bl):
+                # what else is going on there? 
+                # print(111)
         else:
-            # Deflate the rectangles so you can't catch a ball behind the bat
-            player1.rect.inflate(-3, -3)
-            # player2.rect.inflate(-3, -3)
-
             # Do ball and bat collide?
             # Note I put in an odd rule that sets self.hit to 1 when they collide, and unsets it in the next
             # iteration. this is to stop odd ball behaviour where it finds a collision *inside* the
@@ -63,3 +60,8 @@ class Ball(pygame.sprite.Sprite):
         (angle,z) = vector
         (dx,dy) = (z*math.cos(angle),z*math.sin(angle))
         return rect.move(dx,dy)
+
+    def offcourt(self, player):
+        player.score += 1
+        print(player.score)
+          
