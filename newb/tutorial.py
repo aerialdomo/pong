@@ -11,9 +11,13 @@ def score_display(background, screen, font, player1):
     screen.blit(text, textpos)
 
 def main():
+    SCREEN_WIDTH=350
+    SCREEN_HEIGHT=200
+    BALL_VECTOR=(20,5)
+
     # Initialise screen
     pygame.init()
-    screen = pygame.display.set_mode((350, 200))
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption('I am a cow')
 
     # Fill background
@@ -34,7 +38,8 @@ def main():
     global player1 
     player1 = Bat("right")
     # init ball
-    ball = Ball((20,5))
+    # how to restart?
+    ball = Ball(BALL_VECTOR, SCREEN_WIDTH, SCREEN_HEIGHT)
 
     # init sprites
     playersprites = pygame.sprite.RenderPlain((player1))
@@ -52,7 +57,7 @@ def main():
         pressed = pygame.key.get_pressed() 
         get_event = pygame.event.get()
 
-        ballsprite.update(player1)
+        ballsprite.update(player1, SCREEN_WIDTH, SCREEN_HEIGHT)
         playersprites.update()
         for event in get_event:
             if event.type == QUIT:

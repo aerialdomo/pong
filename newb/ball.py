@@ -6,19 +6,18 @@ class Ball(pygame.sprite.Sprite):
     Functions: update, calcnewpos
     Attributes: area, vector"""
 
-    def __init__(self, vector):
+    def __init__(self, vector, screen_width, screen_height):
         color = (66,134,244)
-        width = 20
-        height = 20
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('kitten_50_50.jpeg')
-        self.rect = self.image.get_rect()
+        # rect is ball
+        self.rect = self.image.get_rect(center=(screen_width/2,screen_height/2))
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
         self.vector = vector
         self.hit = 0
 
-    def update(self, player1):
+    def update(self, player1, screen_width, screen_height):
         newpos = self.calcnewpos(self.rect,self.vector)
         self.rect = newpos
         (angle,z) = self.vector
@@ -31,7 +30,7 @@ class Ball(pygame.sprite.Sprite):
             if tr and tl or (br and bl):
                 angle = -angle
             if tl and bl:
-                self.offcourt(player=player1)
+                self.offcourt(player1, screen_width, screen_height)
                 angle = math.pi - angle
             if tr and br:
                 angle = math.pi - angle
@@ -61,7 +60,10 @@ class Ball(pygame.sprite.Sprite):
         (dx,dy) = (z*math.cos(angle),z*math.sin(angle))
         return rect.move(dx,dy)
 
-    def offcourt(self, player):
+    def offcourt(self, player, screen_width, screen_height):
         player.score += 1
+        self.rect = self.image.get_rect(center=(screen_width/2,screen_height/2))
+
+        # reset ball here
 
           
