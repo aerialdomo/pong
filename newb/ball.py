@@ -34,10 +34,9 @@ class Ball(pygame.sprite.Sprite):
                 angle = math.pi - angle
             if tr and br:
                 angle = math.pi - angle
-                # self.offcourt()
+                # self.offcourt(player2, screen_width, screen_height)
             # if tr and br or (tl and bl):
                 # what else is going on there? 
-                # print(111)
         else:
             # Do ball and bat collide?
             # Note I put in an odd rule that sets self.hit to 1 when they collide, and unsets it in the next
@@ -62,8 +61,8 @@ class Ball(pygame.sprite.Sprite):
 
     def offcourt(self, player, screen_width, screen_height):
         player.score += 1
+        # ball position reset
         self.rect = self.image.get_rect(center=(screen_width/2,screen_height/2))
 
-        # reset ball here
 
           

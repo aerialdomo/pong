@@ -1,9 +1,9 @@
 from base import *
 
 
-class Bat(pygame.sprite.Sprite):
-    """Movable tennis 'bat' with which one hits the ball
-    Returns: bat object
+class Paddle(pygame.sprite.Sprite):
+    """Movable tennis 'paddle' with which one hits the ball
+    Returns: paddle object
     Functions: reinit, update, moveup, movedown
     Attributes: which, speed"""
 
