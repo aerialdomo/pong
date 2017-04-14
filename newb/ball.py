@@ -17,7 +17,7 @@ class Ball(pygame.sprite.Sprite):
         self.vector = vector
         self.hit = 0
 
-    def update(self, player1, screen_width, screen_height):
+    def update(self, player1, player2, screen_width, screen_height):
         newpos = self.calcnewpos(self.rect,self.vector)
         self.rect = newpos
         (angle,z) = self.vector
@@ -34,8 +34,7 @@ class Ball(pygame.sprite.Sprite):
                 angle = math.pi - angle
             if tr and br:
                 angle = math.pi - angle
-                # self.offcourt(player2, screen_width, screen_height)
-            # if tr and br or (tl and bl):
+                self.offcourt(player2, screen_width, screen_height)
                 # what else is going on there? 
         else:
             # Do ball and bat collide?
@@ -46,9 +45,9 @@ class Ball(pygame.sprite.Sprite):
             if self.rect.colliderect(player1.rect) == 1 and not self.hit:
                 angle = math.pi - angle
                 self.hit = not self.hit
-            # elif self.rect.colliderect(player2.rect) == 1 and not self.hit:
-            #     angle = math.pi - angle
-            #     self.hit = not self.hit
+            elif self.rect.colliderect(player2.rect) == 1 and not self.hit:
+                angle = math.pi - angle
+                self.hit = not self.hit
             elif self.hit:
                 self.hit = not self.hit
         self.vector = (angle,z)

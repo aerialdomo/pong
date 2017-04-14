@@ -3,15 +3,20 @@ from base import *
 from ball import Ball
 from paddle import Paddle
 
-def score_display(background, screen, font, player1):
-    # how do i control where the score renders on to screen
-    text = font.render(str(player1.score), True, (10, 10, 10))
-    # text = font.render(str(player2.score), True, (10, 10, 10))
+def score_display(background, screen, font, player1, player2):
+    font_color = (10, 10, 10)
+    text_p1 = font.render(str(player1.score), True, font_color)
+    text_p2 = font.render(str(player2.score), True, font_color)
 
-    textpos = text.get_rect()
-    textpos.centerx = background.get_rect().centerx
-    textpos.centery = background.get_rect().centery
-    screen.blit(text, textpos)
+    textpos_p1 = text_p1.get_rect()
+    textpos_p1.right = background.get_rect().right
+    textpos_p1.topright = background.get_rect().topright
+    screen.blit(text_p1, textpos_p1)
+
+    textpos_p2 = text_p2.get_rect()
+    textpos_p2.left = background.get_rect().left
+    textpos_p2.topleft = background.get_rect().topleft
+    screen.blit(text_p2, textpos_p2)
 
 def main():
     SCREEN_WIDTH=350
@@ -60,7 +65,7 @@ def main():
         pressed = pygame.key.get_pressed() 
         get_event = pygame.event.get()
 
-        ballsprite.update(player1, SCREEN_WIDTH, SCREEN_HEIGHT)
+        ballsprite.update(player1, player2, SCREEN_WIDTH, SCREEN_HEIGHT)
         playersprites.update()
         for event in get_event:
             if event.type == QUIT:
@@ -86,11 +91,10 @@ def main():
                     player2.state = "still"  
                                         
         screen.blit(background, (0, 0))
-        screen.blit(background, player1.rect)
         ballsprite.draw(screen)
         playersprites.draw(screen)
         # probs a better place for some of the things in here
-        score_display(background, screen, font, player1)
+        score_display(background, screen, font, player1, player2)
 
         pygame.display.flip()
 
