@@ -8,8 +8,10 @@ class Ball(pygame.sprite.Sprite):
 
     def __init__(self, vector, screen_width, screen_height):
         color = (66,134,244)
+        ball_size = (50, 50)
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('kitten_50_50.jpeg')
+        self.image = pygame.image.load('pokeball.png')
+        self.image = pygame.transform.scale(self.image, ball_size)
         # rect is ball
         self.rect = self.image.get_rect(center=(screen_width/2,screen_height/2))
         screen = pygame.display.get_surface()

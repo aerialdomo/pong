@@ -26,7 +26,7 @@ def main():
     # Initialise screen
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption('I am a cow')
+    pygame.display.set_caption('Pong by Cliu')
 
     # Fill background
     background = pygame.Surface(screen.get_size())
@@ -46,7 +46,6 @@ def main():
     player1 = Paddle("right")
     player2 = Paddle("left")
     # init ball
-    # how to restart?
     ball = Ball(BALL_VECTOR, SCREEN_WIDTH, SCREEN_HEIGHT)
 
     # init sprites
